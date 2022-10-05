@@ -23,7 +23,7 @@ var subnets = [
 ]
 
 resource vnetApp 'Microsoft.Network/virtualNetworks@2021-02-01' = {
-  name: 'vnet-kv-bicep'
+  name: 'vnet-bicep'
   location: location
   tags: tags
   properties: {
