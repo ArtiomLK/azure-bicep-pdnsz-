@@ -8,6 +8,37 @@
 
 ```
 
+## Deploy PDNSZ
+
+### Inline Params
+
+```bash
+# download bicep deployment template file
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
+
+az deployment group create \
+  --name 'pdnsz-deployment-inline-params' \
+  --resource-group 'rg-dns' \
+  --template-file pdnsz-deployment.bicep \
+  --parameters vnet_id=""
+```
+
+### Params File
+
+```bash
+# download bicep deployment template file
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
+
+# download bicep parameters file
+curl -o pdnsz-parameters.json https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/parameters/pdsnz-parameters.json
+
+az deployment group create \
+  --name 'pdnsz-deployment-file-params' \
+  --resource-group 'rg-dns' \
+  --template-file pdnsz-deployment.bicep \
+  --parameters @pdnsz-parameters.json
+```
+
 ## Additional Resources
 
 - PDNSZ
