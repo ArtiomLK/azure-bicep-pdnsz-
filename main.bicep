@@ -14,7 +14,7 @@ param vnet_id string
 
 var pdnsz_list = [
   'privatelink.azure-automation.net'
-  '${replace('privatelink.${environment().suffixes.sqlServerHostname}', '..', '.')}'
+  'privatelink${environment().suffixes.sqlServerHostname}'
   'privatelink.sql.azuresynapse.net'
   'privatelink.dev.azuresynapse.net'
   'privatelink.azuresynapse.net'
@@ -37,7 +37,7 @@ var pdnsz_list = [
   'privatelink.managedhsm.azure.net'
   'privatelink.${location}.azmk8s.io'
   'privatelink.search.windows.net'
-  'privatelink.${environment().suffixes.acrLoginServer}'
+  'privatelink${environment().suffixes.acrLoginServer}'
   'privatelink.azconfig.io'
   'privatelink.siterecovery.windowsazure.com'
   'privatelink.servicebus.windows.net'
