@@ -14,7 +14,7 @@ param vnet_id string
 
 var pdnsz_list = [
   'privatelink.azure-automation.net'
-  'privatelink.${environment().suffixes.sqlServerHostname}'
+  '${replace('privatelink.${environment().suffixes.sqlServerHostname}', '..', '.')}'
   'privatelink.sql.azuresynapse.net'
   'privatelink.dev.azuresynapse.net'
   'privatelink.azuresynapse.net'
