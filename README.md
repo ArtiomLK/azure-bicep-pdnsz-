@@ -2,10 +2,35 @@
 
 [![DEV - Deploy Azure Resource](https://github.com/ArtiomLK/azure-bicep-pdnsz/actions/workflows/dev.orchestrator.yml/badge.svg?branch=main&event=push)](https://github.com/ArtiomLK/azure-bicep-pdnsz/actions/workflows/dev.orchestrator.yml)
 
-## Export All Records from one pdnsz to another pdnsz
+## Deploy PDNSZ
+
+### Inline Params
 
 ```bash
+# download bicep deployment template file
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
 
+az deployment group create \
+  --name 'pdnsz-deployment' \
+  --resource-group 'rg-dns' \
+  --template-file pdnsz-deployment.bicep \
+  --parameters vnet_id="/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
+```
+
+### Params File
+
+```bash
+# download bicep deployment template file
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
+
+# download bicep parameters file
+curl -o pdnsz-parameters.json https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/parameters/pdsnz-parameters.json
+
+az deployment group create \
+  --name 'pdnsz-deployment' \
+  --resource-group 'rg-dns' \
+  --template-file pdnsz-deployment.bicep \
+  --parameters @pdnsz-parameters.json
 ```
 
 ## Additional Resources
