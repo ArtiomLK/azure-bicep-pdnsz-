@@ -10,7 +10,7 @@ param tags object = {}
 // ------------------------------------------------------------------------------------------------
 // PDNSZ configuration parameters
 // ------------------------------------------------------------------------------------------------
-param vnet_hub_id string
+param vnet_id string
 
 var pdnsz_list = [
   'privatelink.azure-automation.net'
@@ -74,6 +74,6 @@ module pdnszDeploy 'components/pdnsz/pdnsz.bicep' = [for pdnsz_n in pdnsz_list: 
   params: {
     tags: tags
     pdnsz_n: pdnsz_n
-    vnet_id: vnet_hub_id
+    vnet_id: vnet_id
   }
 }]
