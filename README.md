@@ -75,6 +75,7 @@ done
 - PDNSZ
 - [MS | Docs | Azure Private Endpoint DNS configuration][3]
 - [MS | Docs | Private Link and DNS integration at scale][4]
+- [MS | Docs | Import and export a private DNS zone file for Azure private DNS][5]
 - Bicep
 - [MS | Docs | Deployment functions for Bicep][1]
 - [MS | Docs | Linter rule - no hardcoded environment URL][2]
@@ -83,3 +84,4 @@ done
 [2]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/linter-rule-no-hardcoded-environment-urls
 [3]: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-dns
 [4]: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/private-link-and-dns-integration-at-scale
+[5]: https://learn.microsoft.com/en-us/azure/dns/private-dns-import-export
