@@ -33,6 +33,43 @@ az deployment group create \
   --parameters @pdnsz-parameters.json
 ```
 
+## Combine multiple az pdnsz into a single pdnsz
+
+```bash
+rg_names=(
+rg-a
+rg-b
+rg-n
+);
+
+i=1; echo $i
+for rg_n in "${rg_names[@]}"
+do
+  echo Number: $i;
+  echo "vm_n: $vm_arc_n";
+  az network private-dns zone export \
+  -g $rg_n \
+  -n privatelink.azurewebsites.net \
+  -f "${i}-privatelink.azurewebsites.net.txt" \
+  --subscription '########-####-####-####-############'
+  echo "";
+  ((i++))
+done
+
+e=1; echo $e
+while [ $e -lt $i ]
+do
+  echo File: "${e}-privatelink.azurewebsites.net.txt";
+  az network private-dns zone import \
+  -g rg-alz-pdnsz \
+  -n privatelink.azurewebsites.net \
+  -f "${e}-privatelink.azurewebsites.net.txt" \
+  --subscription '########-####-####-####-############'
+  echo "";
+  ((e++))
+done
+```
+
 ## Additional Resources
 
 - PDNSZ
