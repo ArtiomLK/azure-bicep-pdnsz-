@@ -13,6 +13,7 @@ curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-
 az deployment group create \
   --name 'pdnsz-deployment' \
   --resource-group 'rg-dns' \
+  --subscription '########-####-####-####-############' \
   --template-file pdnsz-deployment.bicep \
   --parameters vnet_id="/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
 ```
@@ -29,6 +30,7 @@ curl -o pdnsz-parameters.json https://raw.githubusercontent.com/ArtiomLK/azure-b
 az deployment group create \
   --name 'pdnsz-deployment' \
   --resource-group 'rg-dns' \
+  --subscription '########-####-####-####-############' \
   --template-file pdnsz-deployment.bicep \
   --parameters @pdnsz-parameters.json
 ```
@@ -46,7 +48,6 @@ i=1; echo $i
 for rg_n in "${rg_names[@]}"
 do
   echo Number: $i;
-  echo "vm_n: $vm_arc_n";
   az network private-dns zone export \
   -g $rg_n \
   -n privatelink.azurewebsites.net \
