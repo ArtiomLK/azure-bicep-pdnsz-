@@ -10,7 +10,8 @@ resource pdnsz 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 }
 
 resource vnLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = if(!empty(vnet_id)) {
-  name: '${pdnsz_n}/${pdnsz_n}-link'
+  parent: pdnsz
+  name: '${pdnsz_n}-link'
   location: 'global'
   properties: {
     registrationEnabled: false
@@ -18,8 +19,5 @@ resource vnLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-0
       id: vnet_id
     }
   }
-  dependsOn: [
-    pdnsz
-  ]
   tags: tags
 }

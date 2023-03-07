@@ -4,6 +4,9 @@ inputs:
   az_rg_n:
     description: “Azure ResourceGroup name”
     required: true
+  template_path:
+    description: “Template path to be deployed”
+    required: true
 
 runs:
   using: 'composite'
@@ -14,5 +17,5 @@ runs:
       scope: resourcegroup
       resourceGroupName: ${{ inputs.az_rg_n }}
       deploymentMode: Incremental
-      template: examples/examples.bicep
+      template: ${{ inputs.az_rg_n }}
       failOnStdErr: true
