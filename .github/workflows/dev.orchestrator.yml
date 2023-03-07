@@ -31,13 +31,13 @@ jobs:
         echo "Hello, world!"
 
     - run: |
-        echo "Hello, world!"
+        echo ${{ secrets.AZURE_CREDENTIALS.subscriptionId }}
 
       # Test Azure Resource Deployment with pdnsz vnet-link
-    - uses: ./.github/actions/deploy-az-resource
-      with:
-        az_rg_n: ${{ env.RG_N }}
-        template_path: examples/examples.bicep
+    # - uses: ./.github/actions/deploy-az-resource
+    #   with:
+    #     az_rg_n: ${{ env.RG_N }}
+    #     template_path: examples/examples.bicep
 
       # Deploy Resource to ACR
     - uses: azure/docker-login@v1

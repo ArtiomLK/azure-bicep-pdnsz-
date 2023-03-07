@@ -13,7 +13,7 @@ curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-
 az deployment group create \
 --name 'pdnsz-deployment' \
 --resource-group 'rg-dns' \
---subscription '########-####-####-####-############' \
+--subscription '########-####-####-####-############'w \
 --template-file pdnsz-deployment.bicep \
 --parameters vnet_id="/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
 ```
