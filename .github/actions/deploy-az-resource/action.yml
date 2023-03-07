@@ -17,5 +17,5 @@ runs:
       scope: resourcegroup
       resourceGroupName: ${{ inputs.az_rg_n }}
       deploymentMode: Incremental
-      template: ${{ inputs.az_rg_n }}
+      template: ${{ inputs.template_path }}
       failOnStdErr: true
