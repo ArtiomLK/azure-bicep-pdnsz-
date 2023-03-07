@@ -10,7 +10,7 @@ param tags object = {}
 // ------------------------------------------------------------------------------------------------
 // PDNSZ configuration parameters
 // ------------------------------------------------------------------------------------------------
-param vnet_id string
+param vnet_id string = ''
 
 var pdnsz_list = [
   'privatelink.azure-automation.net'
