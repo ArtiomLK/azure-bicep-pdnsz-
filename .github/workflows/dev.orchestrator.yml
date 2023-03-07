@@ -29,12 +29,7 @@ jobs:
 
     # DELETE all resources inside the RG
     - run: |
-        resources="$(az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} | grep id | awk -F \" '{print $4}')"
-        echo echo $resources
-        for id in $resources; do
-          az resource delete --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --ids "$id" --no-wait --verbose
-        done
-      #  az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --query "[].id" -o tsv | xargs -I X -n 1 az resource delete --ids X --no-wait
+        az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --query "[].id" -o tsv | xargs -I X -n 1 az resource delete --ids X --no-wait --verbose
       #  az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --query "[].id" -o tsv | xargs -n 1 az resource delete --ids
 
     #   # Test Azure Resource Deployment with pdnsz vnet-link
