@@ -8,19 +8,19 @@
 
 ```bash
 # download bicep deployment template file
-curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/pdnsz-deployment.bicep
 
 # Deploy without parameters
 az deployment group create \
---name 'pdnsz-deployment' \
---resource-group 'rg-dns' \
+--name 'pdnsz-no-parameters-deployment' \
+--resource-group 'rg-alz-pdnsz' \
 --subscription '########-####-####-####-############' \
 --template-file pdnsz-deployment.bicep
 
 # Deploy with inline parameters
 az deployment group create \
---name 'pdnsz-deployment' \
---resource-group 'rg-dns' \
+--name 'pdnsz-inline-parameters-deployment' \
+--resource-group 'rg-alz-pdnsz' \
 --subscription '########-####-####-####-############' \
 --template-file pdnsz-deployment.bicep \
 --parameters vnet_id="/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
@@ -30,14 +30,14 @@ az deployment group create \
 
 ```bash
 # download bicep deployment template file
-curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
+curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/pdnsz-deployment.bicep
 
 # download bicep parameters file
 curl -o pdnsz-parameters.json https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/parameters/pdsnz-parameters.json
 
 az deployment group create \
---name 'pdnsz-deployment' \
---resource-group 'rg-dns' \
+--name 'pdnsz-file-parameters-deployment' \
+--resource-group 'rg-alz-pdnsz' \
 --subscription '########-####-####-####-############' \
 --template-file pdnsz-deployment.bicep \
 --parameters @pdnsz-parameters.json
