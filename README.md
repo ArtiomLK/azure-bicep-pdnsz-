@@ -10,6 +10,14 @@
 # download bicep deployment template file
 curl -o pdnsz-deployment.bicep https://raw.githubusercontent.com/ArtiomLK/azure-bicep-pdnsz/main/deployment.bicep
 
+# Deploy without parameters
+az deployment group create \
+--name 'pdnsz-deployment' \
+--resource-group 'rg-dns' \
+--subscription '########-####-####-####-############' \
+--template-file pdnsz-deployment.bicep
+
+# Deploy with inline parameters
 az deployment group create \
 --name 'pdnsz-deployment' \
 --resource-group 'rg-dns' \
