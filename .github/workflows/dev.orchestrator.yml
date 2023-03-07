@@ -22,23 +22,21 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Test Azure Resource Deployment without pdnsz vnet-link
-    # - uses: ./.github/actions/deploy-az-resource
-    #   with:
-    #     az_rg_n: ${{ env.RG_N }}
-    #     template_path: examples/examples-wo-pdnsz-vnet-link.bicep
-
-    - run: |
-        echo "Hello, world!"
+    - uses: ./.github/actions/deploy-az-resource
+      with:
+        az_rg_n: ${{ env.RG_N }}
+        template_path: examples/examples-wo-pdnsz-vnet-link.bicep
 
     # DELETE all resources inside the RG
     - run: |
+        az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --query "[].id" -o tsv | xargs -n 1 az resource delete --ids --no-wait
         az resource list --subscription ${{ secrets.SUB_ID }} --resource-group ${{ env.RG_N }} --query "[].id" -o tsv | xargs -n 1 az resource delete --ids
 
       # Test Azure Resource Deployment with pdnsz vnet-link
-    # - uses: ./.github/actions/deploy-az-resource
-    #   with:
-    #     az_rg_n: ${{ env.RG_N }}
-    #     template_path: examples/examples.bicep
+    - uses: ./.github/actions/deploy-az-resource
+      with:
+        az_rg_n: ${{ env.RG_N }}
+        template_path: examples/examples.bicep
 
       # Deploy Resource to ACR
     - uses: azure/docker-login@v1
