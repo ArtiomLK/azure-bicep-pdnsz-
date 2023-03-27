@@ -5,7 +5,7 @@ on:
       - '!**.md'
       - '.github/workflows/dev.orchestrator.yml'
       - 'examples/examples.bicep'
-      - 'components/**'
+      - 'modules/**'
       - 'main.bicep'
 
 name: Deploy Bicep Modules to AZ and ACR
