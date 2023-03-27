@@ -69,7 +69,7 @@ var pdnsz_list = [
 // ------------------------------------------------------------------------------------------------
 // Private DNS zones
 // ------------------------------------------------------------------------------------------------
-module pdnszDeploy 'components/pdnsz/pdnsz.bicep' = [for pdnsz_n in pdnsz_list: {
+module pdnszDeploy 'modules/pdnsz/pdnsz.bicep' = [for pdnsz_n in pdnsz_list: {
   name: 'pdnsz-deployment-${pdnsz_n}'
   params: {
     tags: tags
