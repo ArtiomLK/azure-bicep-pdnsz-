@@ -3,7 +3,7 @@ param pdnsz_n string
 @description('virtual network id')
 param vnet_id string = ''
 
-var vnet_n = vnet_id != '' ? last(split('/', vnet_id)) : ''
+var vnet_n = vnet_id != '' ? last(split(vnet_id, '/')) : ''
 
 resource pdnsz 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: pdnsz_n
