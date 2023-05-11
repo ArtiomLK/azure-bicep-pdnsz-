@@ -4,12 +4,12 @@ targetScope = 'resourceGroup'
 param tags object = {}
 
 @description('Virtual Networks ID')
-param vnet_id string = ''
+param vnet_ids array = []
 
-module pdnsz 'br:bicephubdev.azurecr.io/bicep/modules/pdnsz:0cedf10f8a190b2e01d9005cb3d386f28c329261' = {
+module pdnsz 'br:bicephubdev.azurecr.io/bicep/modules/pdnsz:185462bc91fee795d8ff7d848980f7f2a67ff4be' = {
   name: 'pdnsz-deployment'
   params: {
-    vnet_id: vnet_id
+    vnet_ids: vnet_ids
     tags: tags
   }
 }

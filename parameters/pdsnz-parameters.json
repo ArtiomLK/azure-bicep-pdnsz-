@@ -9,7 +9,7 @@
       }
     },
 
-    "vnet_id": {
+    "vnet_ids": {
       "value": [
         "/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
       ]
