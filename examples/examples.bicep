@@ -49,7 +49,7 @@ resource vnetApp 'Microsoft.Network/virtualNetworks@2021-02-01' = {
 module pdnsz '../main.bicep' = {
   name: 'pdnsz'
   params: {
-    vnet_id: vnetApp.id
+    vnet_ids: [vnetApp.id]
     location: location
     tags: tags
   }
