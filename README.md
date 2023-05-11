@@ -23,7 +23,7 @@ az deployment group create \
 --resource-group 'rg-alz-pdnsz' \
 --subscription '########-####-####-####-############' \
 --template-file pdnsz-deployment.bicep \
---parameters vnet_id="/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
+--parameters vnet_id='("/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>")'
 ```
 
 ### Params File
