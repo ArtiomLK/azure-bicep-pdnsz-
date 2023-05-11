@@ -9,8 +9,10 @@
       }
     },
 
-    "vnet_id": {
-      "value": "/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
+    "vnet_ids": {
+      "value": [
+        "/subscriptions/########-####-####-####-############/resourceGroups/<rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>"
+      ]
     }
   }
 }
