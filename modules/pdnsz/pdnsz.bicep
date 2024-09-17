@@ -14,9 +14,9 @@ resource vnLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-0
   name: '${last(split(vnet_ids[i], '/'))}-link'
   location: 'global'
   properties: {
-    registrationEnabled: false
+    registrationEnabled: vnet_ids[i].auto_registration
     virtualNetwork: {
-      id: vnet_ids[i]
+      id: vnet_ids[i].id
     }
   }
   tags: tags

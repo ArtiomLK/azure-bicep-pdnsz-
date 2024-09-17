@@ -22,7 +22,7 @@ var subnets = [
   }
 ]
 
-resource vnetApp 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+resource vnet1 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   name: 'vnet-bicep'
   location: location
   tags: tags
@@ -52,7 +52,7 @@ var subnets2 = [
   }
 ]
 
-resource vnetApp2 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+resource vnet2 'Microsoft.Network/virtualNetworks@2021-02-01' = {
   name: 'vnet-bicep2'
   location: location
   tags: tags
@@ -63,6 +63,36 @@ resource vnetApp2 'Microsoft.Network/virtualNetworks@2021-02-01' = {
       ]
     }
     subnets: [for subnet in subnets2: {
+      name: subnet.name
+      properties: {
+        addressPrefix: subnet.subnetPrefix
+        delegations: subnet.delegations
+        privateEndpointNetworkPolicies: subnet.privateEndpointNetworkPolicies
+      }
+    }]
+  }
+}
+
+var subnets3 = [
+  {
+    name: 'snet-a'
+    subnetPrefix: '192.161.0.0/28'
+    privateEndpointNetworkPolicies: 'Enabled'
+    delegations: []
+  }
+]
+
+resource vnet3 'Microsoft.Network/virtualNetworks@2021-02-01' = {
+  name: 'vnet-bicep3'
+  location: location
+  tags: tags
+  properties: {
+    addressSpace: {
+      addressPrefixes: [
+        '192.162.0.0/24'
+      ]
+    }
+    subnets: [for subnet in subnets3: {
       name: subnet.name
       properties: {
         addressPrefix: subnet.subnetPrefix
@@ -90,7 +120,16 @@ module onePdnszWvnetLink '../main.bicep' = {
   name: 'one-pdnsz-w-vnet-link'
   params: {
     pdnszs: ['one-pdnsz-w-vnetlink.com']
-    vnet_ids: [vnetApp.id, vnetApp2.id]
+    vnet_ids: [
+      {
+        id: vnet1.id
+        auto_registration: false
+      }
+      {
+        id: vnet2.id
+        auto_registration: true
+      }
+    ]
     location: location
     tags: tags
   }
@@ -113,7 +152,16 @@ module nPdnszWvnetLink '../main.bicep' = {
   name: 'n-pdnsz-w-vnet-link'
   params: {
     pdnszs: ['n-one-pdnsz-w-vnetlink.com', 'n-two-pdnsz-w-vnetlink.com', 'n-three-pdnsz-w-vnetlink.com']
-    vnet_ids: [vnetApp.id, vnetApp2.id]
+    vnet_ids: [
+      {
+        vnet_id: vnet1.id
+        auto_registration: false
+      }
+      {
+        vnet_id: vnet2.id
+        auto_registration: false
+      }
+    ]
     location: location
     tags: tags
   }
@@ -126,6 +174,12 @@ module pdnsz '../main.bicep' = {
   name: 'pdnsz'
   params: {
     deploy_all_pdnszs: true
+    vnet_ids: [
+      {
+        vnet_id: vnet3.id
+        auto_registration: false
+      }
+    ]
     location: location
     tags: tags
   }
