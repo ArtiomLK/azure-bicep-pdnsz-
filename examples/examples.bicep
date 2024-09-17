@@ -10,6 +10,11 @@ var tags = {
 
 param location string = 'eastus2'
 
+var pdnszs = [
+  'privatelink.mongo.cosmos.azure.com'
+]
+
+
 // ------------------------------------------------------------------------------------------------
 // Sample Vnet
 // ------------------------------------------------------------------------------------------------
@@ -74,12 +79,58 @@ resource vnetApp2 'Microsoft.Network/virtualNetworks@2021-02-01' = {
 }
 
 // ------------------------------------------------------------------------------------------------
-// PDNSZ Deployment Examples
+// DEPLOY 1 PDNSZ
+// ------------------------------------------------------------------------------------------------
+module onePdnsz '../main.bicep' = {
+  name: 'one-pdnsz'
+  params: {
+    pdnszs: ['one-pdnsz.com']
+    location: location
+    tags: tags
+  }
+}
+
+// DEPLOY 1 PDNSZ w vnet link
+module onePdnszWvnetLink '../main.bicep' = {
+  name: 'one-pdnsz-w-vnet-link'
+  params: {
+    pdnszs: ['one-pdnsz-w-vnetlink.com']
+    vnet_ids: [vnetApp.id, vnetApp2.id]
+    location: location
+    tags: tags
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+// DEPLOY N PDNSZ
+// ------------------------------------------------------------------------------------------------
+module nPdnsz '../main.bicep' = {
+  name: 'n-pdnsz'
+  params: {
+    pdnszs: ['n-one-pdnsz.com', 'n-two-pdnsz.com', 'n-three-pdnsz.com']
+    location: location
+    tags: tags
+  }
+}
+
+// DEPLOY N PDNSZ W vnetLink
+module nPdnszWvnetLink '../main.bicep' = {
+  name: 'n-pdnsz-w-vnet-link'
+  params: {
+    pdnszs: ['n-one-pdnsz-w-vnetlink.com', 'n-two-pdnsz-w-vnetlink.com', 'n-three-pdnsz-w-vnetlink.com']
+    vnet_ids: [vnetApp.id, vnetApp2.id]
+    location: location
+    tags: tags
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+// DEPLOY ALL PDNSZ W vnetLink
 // ------------------------------------------------------------------------------------------------
 module pdnsz '../main.bicep' = {
   name: 'pdnsz'
   params: {
-    vnet_ids: [vnetApp.id, vnetApp2.id]
+    deploy_all_pdnszs: true
     location: location
     tags: tags
   }
