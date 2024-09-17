@@ -154,11 +154,11 @@ module nPdnszWvnetLink '../main.bicep' = {
     pdnszs: ['n-one-pdnsz-w-vnetlink.com', 'n-two-pdnsz-w-vnetlink.com', 'n-three-pdnsz-w-vnetlink.com']
     vnet_ids: [
       {
-        vnet_id: vnet1.id
+        id: vnet1.id
         auto_registration: false
       }
       {
-        vnet_id: vnet2.id
+        id: vnet2.id
         auto_registration: false
       }
     ]
@@ -176,7 +176,7 @@ module pdnsz '../main.bicep' = {
     deploy_all_pdnszs: true
     vnet_ids: [
       {
-        vnet_id: vnet3.id
+        id: vnet3.id
         auto_registration: false
       }
     ]
