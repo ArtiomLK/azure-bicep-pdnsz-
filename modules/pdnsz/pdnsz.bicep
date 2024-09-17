@@ -11,12 +11,12 @@ resource pdnsz 'Microsoft.Network/privateDnsZones@2020-06-01' = {
 
 resource vnLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2020-06-01' = [for i in range(0, length(vnet_ids)) : if(!empty(vnet_ids[i])) {
   parent: pdnsz
-  name: '${last(split(vnet_ids[i], '/'))}-link'
+  name: '${last(split(vnet_ids[i].id, '/'))}-link'
   location: 'global'
   properties: {
-    registrationEnabled: false
+    registrationEnabled: vnet_ids[i].auto_registration
     virtualNetwork: {
-      id: vnet_ids[i]
+      id: vnet_ids[i].id
     }
   }
   tags: tags

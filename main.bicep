@@ -10,9 +10,14 @@ param tags object = {}
 // ------------------------------------------------------------------------------------------------
 // PDNSZ configuration parameters
 // ------------------------------------------------------------------------------------------------
+// List of Private DNS Zones to deploy
+param pdnszs array = []
+// if you want to deploy all pdnszs, set this to true
+param deploy_all_pdnszs bool = false
+// Creates pdnsz link to these vnets
 param vnet_ids array = []
 
-var pdnsz_list = [
+var pdnsz_list = deploy_all_pdnszs ? [
   'privatelink.azure-automation.net'
   'privatelink${environment().suffixes.sqlServerHostname}'
   'privatelink.sql.azuresynapse.net'
@@ -64,7 +69,7 @@ var pdnsz_list = [
   'privatelink.his.arc.azure.com'
   'privatelink.guestconfiguration.azure.com'
   'privatelink.media.azure.net'
-]
+] : pdnszs
 
 // ------------------------------------------------------------------------------------------------
 // Private DNS zones
