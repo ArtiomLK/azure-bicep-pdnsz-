@@ -76,7 +76,7 @@ resource vnet2 'Microsoft.Network/virtualNetworks@2021-02-01' = {
 var subnets3 = [
   {
     name: 'snet-a'
-    subnetPrefix: '192.161.0.0/28'
+    subnetPrefix: '192.162.0.0/28'
     privateEndpointNetworkPolicies: 'Enabled'
     delegations: []
   }
